@@ -18,7 +18,7 @@ const port = process.env.PORT || 3001;
 const server = createServer(app); 
 const io = new Server(server, { 
     cors: {
-        origin: 'http://localhost:3000', 
+        origin:[ 'http://localhost:3000', 'https://dacn-0qlb.onrender.com'], 
         methods: ["GET", "POST"],
         credentials: true,
     }
@@ -29,7 +29,10 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 app.use(cors(
     {
-        origin: 'http://localhost:3000',
+        [
+        'http://localhost:3000',              
+        'https://dacn-0qlb.onrender.com'      
+        ],
         credentials: true,
     }
 ));
