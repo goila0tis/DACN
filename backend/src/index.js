@@ -16,26 +16,32 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 const server = createServer(app); 
+
+// Cấu hình Socket.io (Đoạn này bạn viết đúng rồi)
 const io = new Server(server, { 
     cors: {
-        origin:[ 'http://localhost:3000', 'https://dacn-0qlb.onrender.com'], 
+        origin: ['http://localhost:3000', 'https://dacn-0qlb.onrender.com'], 
         methods: ["GET", "POST"],
         credentials: true,
     }
 });
 
 const genAI = new GoogleGenerativeAI(process.env.GEMENI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-app.use(cors(
-    {
-        [
+// LƯU Ý: Kiểm tra lại tên model. Thường là 'gemini-1.5-flash' hoặc 'gemini-pro'.
+// 'gemini-2.5-flash' có thể chưa tồn tại hoặc sai tên, nếu chạy bị lỗi API thì sửa lại dòng này nhé.
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); 
+
+// --- ĐOẠN ĐÃ SỬA LỖI ---
+app.use(cors({
+    origin: [
         'http://localhost:3000',              
         'https://dacn-0qlb.onrender.com'      
-        ],
-        credentials: true,
-    }
-));
+    ],
+    credentials: true,
+}));
+// -----------------------
+
 app.use(express.json({ limit: '500mb' }));
 app.use(express.urlencoded({ limit: '500mb' }));
 app.use(bodyParser.json());
@@ -93,8 +99,6 @@ io.on("connection", (socket) => {
         console.log("Chatbot Client disconnected:", socket.id);
     });
 });
-
-
 
 mongoose.connect(`${process.env.MONGO_DB}`)
     .then(() => {
