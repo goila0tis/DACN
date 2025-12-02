@@ -1,14 +1,12 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
+  "description": "Node.js backend for ecommerce project",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "dependencies": {
     "@google/genai": "^1.0.0",
@@ -23,7 +21,11 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.1",
-    "nodemon": "^3.1.10",
     "socket.io": "^4.8.1"
-  }
-}
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "author": "",
+  "license": "ISC"
+} 
