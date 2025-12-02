@@ -27,10 +27,7 @@ const io = new Server(server, {
 });
 
 const genAI = new GoogleGenerativeAI(process.env.GEMENI_API_KEY);
-
-// LƯU Ý: Kiểm tra lại tên model. Thường là 'gemini-1.5-flash' hoặc 'gemini-pro'.
-// 'gemini-2.5-flash' có thể chưa tồn tại hoặc sai tên, nếu chạy bị lỗi API thì sửa lại dòng này nhé.
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); 
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); 
 
 // --- ĐOẠN ĐÃ SỬA LỖI ---
 app.use(cors({
